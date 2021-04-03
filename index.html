@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>5桁でポン！</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+<style>
+
+* {
+    font-family: 'Dela Gothic One', cursive;
+}
+
+body {
+    background: #eee;
+}
+
+input {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    color: #0089D0;
+    padding: 15px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 20px;
+}
+.title .big {
+    font-size: 100px;
+    color: #EE2733;
+}
+.container {
+    text-align: center;
+    width: 400px;
+    margin: 100px auto;
+}
+.container #fivecode {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.container #go {
+    width: 100%;
+}
+
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title"><span class="big">5</span>桁でポン！</div>
+        <form id="main_form" onsubmit="return jump()">
+            <input id="fivecode" type="tel" maxlength="5">
+            <input id="go" type="button" value="Go!" onclick="jump()">
+        </form>
+    </div>
+<script>
+
+function getCheckDigit(isbn) {
+    let total = 0;
+    String(isbn).split("").forEach((n,i) => {
+        total += (i % 2 == 0)? Number(n) : Number(n) * 3;
+    });
+    return ((10 - (total % 10))) % 10;
+}
+
+function jump() {
+    const code5 = document.querySelector("#fivecode").value;
+    if (!code5.match(/^\d{5}$/)) {
+        return false;
+    }
+    const cd = getCheckDigit(`9784641${code5}`);
+    const url = `http://www.yuhikaku.co.jp/books/detail/9784641${code5}${cd}`;
+    window.open(url);
+    return false;
+}
+
+window.onload = function () {
+    document.querySelector("#fivecode").focus();
+}
+
+</script>
+
+</body>
+
+</html>
