@@ -72,10 +72,14 @@ input {
 <script>
 
 function getCheckDigit(isbn) {
-    let total = 0;
-    String(isbn).split("").forEach((n,i) => {
-        total += (i % 2 == 0)? Number(n) : Number(n) * 3;
-    });
+    const total = String(isbn).split("").map((n,i) => {
+        if (i % 2 == 0) {
+            return Number(n);
+        }
+        return Number(n) * 3;
+    }).reduce((accum, x) => {
+        return accum + Number(x)
+    }, 0);
     return ((10 - (total % 10))) % 10;
 }
 
