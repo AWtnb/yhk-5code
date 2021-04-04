@@ -20,8 +20,8 @@ input {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     color: #0089D0;
-    padding: 15px;
-    font-size: 20px;
+    padding: 5px;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 
@@ -32,6 +32,7 @@ input {
     font-size: 100px;
     color: #EE2733;
 }
+
 .container {
     text-align: center;
     width: 400px;
@@ -44,6 +45,13 @@ input {
 }
 .container #go {
     width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+    .container {
+        border: 1px solid tomato;
+        width: 80%;
+    }
 }
 
 </style>
